@@ -19,7 +19,7 @@ h1 {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-#start-btn {
+button {
     width: 200px;
     height: 50px;
     border-radius: 5px;
@@ -30,11 +30,48 @@ h1 {
     color: whitesmoke;
 }
 
-#start-btn:hover {
+button:hover {
     opacity: .8;
     cursor: pointer;
 }
 
-#start-btn:active {
+button:active {
     opacity: 1; 
+}
+
+/* Design the header and question page */
+
+#score-timer {
+    border: 2px solid green;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#score {
+    font-size: 50px;
+    font-family: sans-serif;
+    color: cornflowerblue;
+}
+
+#time {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    color: darkslateblue;
+}
+
+#multiple-choice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    border: 2px solid yellow;
+}
+
+#submit {
+    border: 2px solid purple;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
 }
