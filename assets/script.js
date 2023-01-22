@@ -4,8 +4,10 @@ let submitPage = document.querySelector("#save-score");
 let multipleChoice = document.querySelector("#multiple-choice");
 let submitBtn = document.querySelector("#submit");
 let scoreTimer = document.querySelector("#score-timer")
+let timer = document.querySelector("#time");
 let position = 0;
 let questionNum = 1;
+let time = 30;
 
 var quizQA = [
     {
@@ -63,11 +65,12 @@ submitPage.setAttribute("style", "display:none");
 scoreTimer.setAttribute("style", "display:none")
 multipleChoice.setAttribute("style", "display:none")
 
-startBtn.addEventListener("click", startQuiz);
+
 function startQuiz() {
     multipleChoice.setAttribute("style", "display:flex");
     scoreTimer.setAttribute("style", "display:flex")
     mainPage.setAttribute("style", "display:none");
+    countDown();
     getQuestions();
 }
 
@@ -76,10 +79,9 @@ function getQuestions() {
     let questionPosition = quizQA[position];
     let myQuestion = document.createElement("h2");
     myQuestion.setAttribute("style", "font-size: 40px")
-    myQuestion.innerText = questionNum + ". " + questionPosition.question;
+    myQuestion.innerText = position+1 + ") " + questionPosition.question;
     multipleChoice.appendChild(myQuestion);
 
-    let btnID = 1;
     for (let a in questionPosition.answer) {
         let myAnswer = document.createElement("button");
         myAnswer.setAttribute("id", btnID);
@@ -89,8 +91,9 @@ function getQuestions() {
         myAnswer.innerText = questionPosition.answer[a];
         myAnswer.value = questionPosition.answer[a];
         multipleChoice.appendChild(myAnswer);
-        btnID++;
     };
+
+    
 }
 
 function selectAnswer(e) {
@@ -106,6 +109,7 @@ function selectAnswer(e) {
     }
     else if (answerVal.value !== quizQA[position].correct) {
         nextQuestion("red", "Incorrect!");
+        time = time - 10;
     }
     
 }
@@ -125,9 +129,24 @@ function nextQuestion(color, answer) {
     submitBtn.appendChild(nextBtn);
 
     nextBtn.addEventListener("click", ()=>{
-        submitBtn.innerHTML = "";
-        startQuiz();  
+        submitBtn.innerHTML = "";  
+        getQuestions();
     })
 }
 
+function countDown() {
+    let timeRemainder = setInterval(() => {
+        timer.innerHTML = `Time: ${time}`;
+        time--;
+
+        if (time < 0) {
+            clearInterval(timeRemainder);
+        }
+    }, 1000)
+
+    
+}
+
+
+startBtn.addEventListener("click", startQuiz);
 multipleChoice.addEventListener("click", selectAnswer);
