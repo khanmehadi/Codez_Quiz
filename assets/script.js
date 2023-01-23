@@ -25,7 +25,7 @@ let pointStorage;
 let btnID = 1;
 let position = 0;
 let questionNum = 1;
-let time = 10;
+let time = 80;
 let points = 0;
 
 submitScorePage.setAttribute("style", "display:none");
@@ -34,58 +34,60 @@ scoreTimer.setAttribute("style", "display:none");
 multipleChoice.setAttribute("style", "display:none");
 clearScorePge.setAttribute("style", "display:none");
 
+// Create an array containing multiple question and answer objects.
 var quizQA = [
     {
         question: "HTML ______ provides addtional information about an HTML element:",
-        answer: ["Attributes", "Values", "Id", "incorrect"],
+        answer: ["Attributes", "Style", "Classes", "Layout"],
         correct: "Attributes"  
     },
 
     {
         question: "Which attribute is used to specify a unique way to identify an element?",
-        answer: ["incorrect",
+        answer: ["class",
                  "id",
-                 "incorrect",
-                 "incorrect"],
+                 "href",
+                 "placeholder"],
         correct: "id"  
     },
     
     {
         question: "Choose the correct HTML element for the largest heading:",
-        answer: ["incorrect",
-                  "incorrect",
-                  "<h1>",
-                  "incorrect"],
+        answer: [ "h6",
+                  "h3",
+                  "h1",
+                  "All are the same"],
         correct: "<h1>"  
     },
     {
-        question: "What does CSS stand for?",
-        answer: ["incorec",
-                  "incorrect",
-                  "incorrect",
+        question: "What does CSS stand for ?",
+        answer: [ "Cross Section Style",
+                  "Comma Sepperated Style",
+                  "Computer Style Section",
                   "Cascading Style Sheets"],
         correct: "Cascading Style Sheets"
     },
 
     {
         question: "Which HTML tag is used to define an internal style sheet?",
-        answer: ["incorrect",
-                 "incorrect",
+        answer: ["<a>",
+                 "<p>",
                  "<style>",
-                 "incorrect"], 
+                 "<script>"], 
         correct: "<style>"  
     },
 
     {
         question: "How do you insert a comment in a CSS file?",
         answer: ["/* */",
-                 "incorrect",
-                 "incorrect",
-                 "incorrect"],             
+                 "//",
+                 "/*",
+                 "#"],             
         correct: "/* */"  
     },
 ]
 
+// Inital start of the quiz. The timer and questions are generated and renddered on the screen.
 function startQuiz() {
     multipleChoice.setAttribute("style", "display:flex");
     scoreTimer.setAttribute("style", "display:flex")
@@ -94,7 +96,7 @@ function startQuiz() {
     getQuestions();
 }
 
-
+// Get the questions and answers from the quizQa array object and render them on the screen dynamically.
 function getQuestions() {
     let questionPosition = quizQA[position];
     let myQuestion = document.createElement("h2");
@@ -117,6 +119,7 @@ function getQuestions() {
     
 }
 
+// When an answer is correct 5 points are added to the score. Incorrect answer deducts 10 seconds.
 function selectAnswer(e) {
     let answerVal = e.target;
     console.log(answerVal.value);
@@ -135,6 +138,8 @@ function selectAnswer(e) {
     }
 }
 
+// A new page is rendered on the screen after choosing an answer. Wrong answer is displayed incorrect in red
+// Correct answers are displayed correct! in green. A button is provided to move to the next set of questions and answers.
 function nextQuestion(color, answer) {
     let myValue = document.createElement("p");
     myValue.style.color = color;
@@ -151,10 +156,16 @@ function nextQuestion(color, answer) {
 
     nextBtn.addEventListener("click", ()=>{
         submitContainer.innerHTML = "";
+        if (position >= quizQA.length) {
+            saveScore.setAttribute("style", "display:flex");
+            grade.setAttribute("style", "color:green;");
+            grade.innerHTML = `Your score: ${points}`;
+        }
         getQuestions();       
     })
 }
 
+// Create countdown by using setInterval function of 1 second. The timer varable is deducted by 1 every second.
 function countDown() {
     let timeRemainder = setInterval(() => {
         timer.innerHTML = `Time: ${time}`;
@@ -169,12 +180,13 @@ function countDown() {
 
         }else if (position >= quizQA.length) {
             clearInterval(timeRemainder);
-            saveScore.setAttribute("style", "display:flex");
-            grade.innerHTML = `Your score: ${points}`;
+            // saveScore.setAttribute("style", "display:flex");
+            // grade.innerHTML = `Your score: ${points}`;
         }
     }, 1000) 
 }
 
+// Rendering the scores of each end user on the page. Score data is retrived from localStorage.
 function highScores() {
     saveScore.setAttribute("style", "display:none");
     multipleChoice.setAttribute("style", "display:none");
@@ -190,6 +202,7 @@ function highScores() {
     }   
 }
 
+// Setting and getting data from local storage. A userInfo object is created to store the data within the application.
 function submitInitialScore(e) {
     e.preventDefault();
     multipleChoice.setAttribute("style", "display:none");
@@ -207,23 +220,25 @@ function submitInitialScore(e) {
     highScores();
 }
 
-
+// Various event listners to be able to click and interact with the elements.
 submitInit.addEventListener("click", submitInitialScore);
 myScore.addEventListener("click", highScores);
 startBtn.addEventListener("click", startQuiz);
 multipleChoice.addEventListener("click", selectAnswer);
 
+// After submitting score, clicking on the backBtn button reloads the page and the user is navigated to the main page.
 backBtn.addEventListener("click", ()=>{
     window.location.reload();
 });
 
+// Click the button to remove all the score history from local storage.
 clearBtn.addEventListener("click", ()=>{
     localStorage.removeItem("score"); 
     window.location.reload(); 
 })
 
+// If the Quiz ends due to timeup, the system will end the quiz.
 timeUpContinueBtn.addEventListener("click", ()=>{
     clearScorePge.setAttribute("style", "display:none");
-    //submitScorePage.setAttribute("style", "display:flex");
     saveScore.setAttribute("style", "display:flex");
 })
