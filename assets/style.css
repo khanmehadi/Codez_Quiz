@@ -42,7 +42,6 @@ button:active {
 /* Design the header and question page */
 
 #score-timer {
-    border: 2px solid green;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -52,6 +51,10 @@ button:active {
     font-size: 50px;
     font-family: sans-serif;
     color: cornflowerblue;
+}
+
+a {
+    text-decoration: none;
 }
 
 #time {
@@ -64,19 +67,15 @@ button:active {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    border: 2px solid yellow;
 }
 
 #submit {
-    border: 2px solid purple;
     display: flex;
     flex-direction: column; 
     align-items: center;
 }
 
 #complete-continue {
-    border: 2px solid red;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -120,7 +119,6 @@ button:active {
 
 .history {
     color: black;
-    border: 2px black solid;
     background-color: blanchedalmond;
     width: 300%;
     padding: 15px;
