@@ -71,7 +71,69 @@ button:active {
 #submit {
     border: 2px solid purple;
     display: flex;
+    flex-direction: column; 
+    align-items: center;
+}
+
+#complete-continue {
+    border: 2px solid red;
+    display: flex;
     flex-direction: column;
     align-items: center;
+}
 
+#complete {
+    color: green;
+    font-size: 50px;
+    font-family: sans-serif;
+}
+
+#final-score {
+    font-family: sans-serif;
+}
+
+#initials {
+    width: 250px;
+    height: 30px;
+    
+}
+
+#submit-init {
+    width: 100px;
+    height: 30px;
+}
+
+#submit-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: cornflowerblue;
+    font-family: sans-serif;
+    
+}
+
+#history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.history {
+    color: black;
+    border: 2px black solid;
+    background-color: blanchedalmond;
+    width: 300%;
+    padding: 15px;
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.submit-score {
+    margin-top: 10px;
+}
+
+#cleard-score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

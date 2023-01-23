@@ -17,17 +17,36 @@
         <button id="start-btn">START QUIZ</button>
     </section>
     <header id="score-timer">
-        <h2 id="score">Score:</h2>
+        <a href="#submit-score"><h2 id="score">High Scores</h2></a>
         <p id="time">Time:</p>
     </header>
     <section id="multiple-choice">
 
-    </section>
+    </section id="submit-container">
     <div id="submit" >
         <!-- <button id="submit-btn">Next</button> -->
     </div>
-    <section id="save-score">
-
+    <section id="complete-continue">
+        <p id="complete">Complete!</p>
+        <h2 id="final-score">Enter your initals to save your score.</h2>
+        <p id="grade"></p>
+        <div>
+            <form id="form">
+                <input id="initials" type="text" placeholder="Your Initals">
+                <input id="submit-init" type="submit" value="Submit">
+            </form>
+        </div>    
+    </section>
+    <section id="submit-score">
+        <h2>High Scores</h2>
+        <div id="history-container">
+        </div>
+        <button class="submit-score" id="back">Back</button>
+        <button class="submit-score" id="clear">Clear History</button>
+    </section>
+    <section id="cleard-score">
+        <h1>Sorry, time is up!</h1>
+        <button class="submit-score" id="time-continue">Continue</button>
     </section>
     <script src="./assets/script.js"></script>
 </body>
